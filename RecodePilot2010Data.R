@@ -11,7 +11,7 @@ library(haven)   # needed for following read_spss function.
 library(sjmisc)
 library(ggplot2)
 
-casedata.Pilot <- sjmisc::read_spss("C:/Users/jckenned/Documents/Research/EPL Project/DataFiles/Files from CAS zip file/01_Pilot2010_n=304.sav")
+casedata.Pilot <- sjmisc::read_spss("C:/Users/jckenned/Documents/Research/EPL Project/Values&EPL paper/DataFiles/Files from CAS zip file/01_Pilot2010_n=304.sav")
 # view_df(casedata.Pilot, showFreq = TRUE, showPerc = TRUE) # shows var names & labels; appends freq and % for values.
 
 # NOTE: In original spss dataset I had to delete the label for "ID" variable. It seems that the label
