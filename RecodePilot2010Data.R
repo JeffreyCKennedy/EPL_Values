@@ -127,14 +127,14 @@ scores.NewScales <- scoreItems(keys, subsetCasedata.Pilot, missing=TRUE, impute=
 # add the new scale scores to casedata.Pilot using dplyr::left_join, matching by ID.
 casedata.Pilot <- dplyr::left_join(casedata.Pilot, as.data.frame(scores.NewScales$scores), by = "ID")
 
-view_df(casedata.Pilot, showFreq = TRUE, showPerc = TRUE) # shows var names & labels; appends freq and % for values.
+view_df(casedata.Pilot, show.frq = TRUE, show.prc = TRUE) # shows var names & labels; appends freq and % for values.
 
 ################### RUN ABOVE SYNTAX TO RECODE AND COMPUTE VARS IN DATAFRAME #################
 
 
 
 # Using sjPlot to visualise correlations. Make sure sjPlot is loaded.
-small.df <- select(casedata.pilot, INT_ENT2IT:INDCOL_VI7IT) 
+small.df <- select(casedata.Pilot, INT_ENT2IT:INDCOL_VI7IT) 
 sjp.corr(small.df)
 # Following uses dplyr to select non-adjacent columns:
 sjp.corr(dplyr::select(casedata.Pilot, one_of(c("MOT_ENT9IT","MOT_PRO9IT","MOT_LDR9IT",
@@ -177,23 +177,25 @@ corr.test(Singelis, AffIdent, adjust = "none")
 corr.test(Singelis, SocNorm, adjust = "none")
 corr.test(Singelis, Calc, adjust = "none")
 
-alpha(Singelis_VI)         #raw Cronbachs & stdised alpha from Pearsons corr & cov matrices.
-alpha(Singelis_VC)         #raw Cronbachs & stdised alpha from Pearsons corr & cov matrices.
-alpha(Singelis_HI)     #raw Cronbachs & stdised alpha from Pearsons corr & cov matrices.
-alpha(Singelis_HC)     #raw Cronbachs & stdised alpha from Pearsons corr & cov matrices.
+# Note: installing ggplot2 after psych masks 'alpha' from psych, so need to specify package.
+
+psych::alpha(Singelis_VI)         #raw Cronbachs & stdised alpha from Pearsons corr & cov matrices.
+psych::alpha(Singelis_VC)         #raw Cronbachs & stdised alpha from Pearsons corr & cov matrices.
+psych::alpha(Singelis_HI)     #raw Cronbachs & stdised alpha from Pearsons corr & cov matrices.
+psych::alpha(Singelis_HC)     #raw Cronbachs & stdised alpha from Pearsons corr & cov matrices.
 ########
 # Following don't work - get error message that Singelis has more than 8 categories
 # for items, so polychoric prob not needed. Scale has 9 items. Seems that the polychoric
 # matrix is not created, so subsequent command to show rho throws an error.
 ########
 poly_VI <- polychoric(Singelis_VI) # saves polychoric corr matrix and tau values
-alpha(poly_VI$rho)   # raw and stdised alpha, & item stats - as matrix is polychor corr, alpha is ordinal alpha.
+psych::alpha(poly_VI$rho)   # raw and stdised alpha, & item stats - as matrix is polychor corr, alpha is ordinal alpha.
 poly_VC <- polychoric(Singelis_VC) # saves polychoric corr matrix and tau values
-alpha(poly_VC$rho)   # raw and stdised alpha, & item stats - as matrix is polychor corr, alpha is ordinal alpha.
+psych::alpha(poly_VC$rho)   # raw and stdised alpha, & item stats - as matrix is polychor corr, alpha is ordinal alpha.
 poly_HI <- polychoric(Singelis_HI) # saves polychoric corr matrix and tau values
-alpha(poly_HI$rho)   # raw and stdised alpha, & item stats - as matrix is polychor corr, alpha is ordinal alpha.
+psych::alpha(poly_HI$rho)   # raw and stdised alpha, & item stats - as matrix is polychor corr, alpha is ordinal alpha.
 poly_HC <- polychoric(Singelis_HC) # saves polychoric corr matrix and tau values
-alpha(poly_HC$rho)   # raw and stdised alpha, & item stats - as matrix is polychor corr, alpha is ordinal alpha.
+psych::alpha(poly_HC$rho)   # raw and stdised alpha, & item stats - as matrix is polychor corr, alpha is ordinal alpha.
 
 sink()
 

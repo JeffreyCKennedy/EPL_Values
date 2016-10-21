@@ -8,7 +8,7 @@ library(psych)   # Used for creating scales and calculating reliability and othe
 library(car)     # Used for the recode function.
 library(haven)   # needed for following read_spss function.
 library(sjmisc)
-library(ggplot2)
+library(ggplot2) # NOTE: masks alpha from psych
 
 # Only need to use following for first time reading spss data into R. Can use 'load' subsequently.
 casedata <- sjmisc::read_spss("C:/Users/jckenned/Documents/Research/EPL Project/Values&EPL paper/DataFiles/Files from CAS zip file/02_CAS_Indepth2010_Phase1_n272_ItemsNotScales.sav")
